@@ -1,24 +1,5 @@
 ##PROGRAMME SOUS LICENSE G.P.L ........ Joris Placette ........ 2017
 
-global appVersion #Variable contenant le numero de version du porgramme (écrit avec les données)
-
-global palette
-
-global posxmax
-
-comValue =0
-posxmax = 200
-appVersion = "0.0.1"
-helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
-githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
-
-cacheData = {
-"angleinter":    0,
-"angletotal":   0,
-"posx":   0,
-"versys":   appVersion,
-}# cachedata , données fournies par l'utilisateur, en attente d'être envoyées à la carte ou enregistrées
-##boutons
 
 '''à changer'''
 def rbfcbutton():  #fonction appelée pour ouvrir un fichier existant
@@ -34,21 +15,18 @@ def wbfcbutton(): #fonction appelée pour écrire les valeurs dans un fichier
    datasheets.pickwrite(cacheData) # se référer à datasheets.py
 
 '''à changer'''
-def verifbutton(): #vérification des données fournies par l'utilisateur
+def startbutton():
    nberror = 0
    if nberror == 0: #si tout est valide
       pulldata()
-      refreshcanvas(cacheData)
-      guivalidation()
-      print("Les informations saisies ne contiennes visiblement pas d' erreures")
+      MyDraw.increment(cacheData["increment"])
+      refreshcanvas()
 
 '''à changer'''
 #réccupération des données de l'utilisateur
 def pulldata():
     #récupération des données
-   '''cacheData["angletotal"] = saisieangletotal.get()
-   cacheData["angleinter"] = saisieangleinter.get()
-   cacheData["posx"] = saisieposx.get()'''
+   cacheData["increment"] = int(increment.get())
 
 '''à ne surtout pas changer <3'''
 def donothing(): #ne fait rien, comme son nom l'indique
@@ -77,24 +55,14 @@ def guimessage(color, context, reason):
 
    root.mainloop()
 
-'''à changer'''
-def guivalidation():
-   validationframe = LabelFrame(root, text="Tout semble correct :) ", fg="green" )
-   validationframe.pack(fill="both", expand="no", side=BOTTOM)
-
-   destroybutton= Button(validationframe, text="x", command=validationframe.destroy)
-   destroybutton.pack(side=LEFT)
-
-   savebutton= Button(validationframe, text="enregistrer", command=wbfcbutton, fg="green")
-   savebutton.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
-
-   desc= Label(validationframe, text="posx: {}  angle total: {}  angle intermidiaire: {}".format(cacheData["posx"],cacheData["angletotal"],cacheData["angleinter"]), fg="green")
-   desc.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
-   root.mainloop()
-
-
 ## init tkinter
 #importation des bibliotheques pyhton
+try:
+    from tests import listes
+    print("bibliothèque importée avec succès :  listes")
+except:
+    print("Impossible d'importer la bibliothèque :  listes")
+
 try: #schéma classique verbeux, afin que l'utilisateur sache quels fichiers sont manquants
     from tkinter import *
     print("bibliothèque importée avec succès :  tkinter")
@@ -125,6 +93,26 @@ try:
     print("bibliothèque importée avec succès :  lib\datasheets")
 except:
     print("Impossible d'importer la bibliothèque :  lib\datasheets")
+
+
+global appVersion #Variable contenant le numero de version du porgramme (écrit avec les données)
+
+global palette
+
+global posxmax
+
+global MyDraw
+
+MyDraw = listes.Draw(6,6)
+
+comValue =0
+posxmax = 200
+appVersion = "0.0.1"
+helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
+githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
+
+cacheData = {}
+
 
 root=Tk() #création de la fenêtre tkinter racine
 
@@ -164,13 +152,28 @@ aside = Frame(root)
 aside.pack(side=LEFT)
 
 ##init canvas
-w = Canvas(aside, width=600, height=600)
+w = Canvas(aside, width=600, height=600, background='white')
 w.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
 '''à changer'''
-def refreshcanvas(cacheData):
+def refreshcanvas():
    w.delete("all")
-   rectangle = w.create_rectangle(10, 30, 190, 40, fill="white")
+
+   cacheData["draw"] = MyDraw.getCurrentDraw()
+   for i in range(0,len(cacheData['draw'])):
+        for n in range(0,MyDraw.yLen):
+           print(cacheData['draw'][i][n])
+        print("")
+
+   for x in range(0,len(cacheData['draw'])):
+       for y in range(0,len(cacheData['draw'][x])):#abcd
+           print('x = {} y = {}  b = {}'.format(x,y,cacheData['draw'][x][y]))
+           a = (x/MyDraw.xLen*600, y/MyDraw.yLen*600)
+           b = ((a[0]+ 600/MyDraw.xLen), a[1]+600/MyDraw.yLen)
+           if cacheData['draw'][x][y] == 0 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="white")
+           if cacheData['draw'][x][y] == 1 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="black")
+
+
 
    print("canvas actualisé avec succès !")
 
@@ -178,15 +181,15 @@ def refreshcanvas(cacheData):
 aside = LabelFrame(root, text="Coucou ,  je suis aside LabelFrame !")
 aside.pack(fill="both", expand="yes", side=TOP)
 
-left = Label(aside, text="Position linéaire :")
+left = Label(aside, text="increment :")
 left.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
-saisieposx = Spinbox(aside, from_=0, to=100,)
-saisieposx.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
+increment = Spinbox(aside, from_=1, to=1000,)
+increment.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
 ##panneau  rotat°
 
-checkbutton= Button(root, text="Verifier", command=verifbutton)
+checkbutton= Button(root, text="GO", command=startbutton)
 checkbutton.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
 root.mainloop()

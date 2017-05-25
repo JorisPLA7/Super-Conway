@@ -37,11 +37,13 @@ class Draw():
     def increment(self, increment):
         for i in range(self.i, self.i+ increment):
             self.draw.append([ [self.__refresh(x,y,self.i-1) for y in range(self.yLen)] for x in range(self.xLen)])
-            for n in range(0,self.xLen):
-                print(self.draw[i][n])
-            print("")
+            if __name__ == '__main__':
+                for n in range(0,self.xLen):
+                    print(self.draw[i][n])
+                print("")
+    def getCurrentDraw(self):
+        return self.draw[len(self.draw)-1]
 
-
-
-MyDraw = Draw(6,6)
-MyDraw.increment(10)
+if __name__ == '__main__':
+    MyDraw = Draw(6,6)
+    MyDraw.increment(10)
