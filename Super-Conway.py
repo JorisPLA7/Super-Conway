@@ -116,11 +116,6 @@ try:
 except:
     print("Impossible d'importer la bibliothèque :  pickle")
 try:
-    from lib import graphiti
-    print("bibliothèque importée avec succès :  lib\graphiti")
-except:
-    print("Impossible d'importer la bibliothèque :  lib\graphiti")
-try:
     from lib import web
     print("bibliothèque importée avec succès :  lib\web")
 except:

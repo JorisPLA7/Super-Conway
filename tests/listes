@@ -1,0 +1,3 @@
+xLen = 6
+yLen = 6
+game = [ [' ' for i in range yLen] for i in range xLenen]
