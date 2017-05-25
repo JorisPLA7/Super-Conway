@@ -107,7 +107,7 @@ MyDraw = listes.Draw(6,6)
 
 comValue =0
 posxmax = 200
-appVersion = "0.0.1"
+appVersion = "0.0.2 canvas done"
 helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
 githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
@@ -116,7 +116,7 @@ cacheData = {}
 
 root=Tk() #création de la fenêtre tkinter racine
 
-root.wm_title('Super Pano GUI')#definition du titre
+root.wm_title('Super Conway')#definition du titre
 root.wm_iconbitmap('ressources\supano.ico')#definition de l'icone
 
 
@@ -160,10 +160,10 @@ def refreshcanvas():
    w.delete("all")
 
    cacheData["draw"] = MyDraw.getCurrentDraw()
-   for i in range(0,len(cacheData['draw'])):
+   ''' for i in range(0,len(cacheData['draw'])):
         for n in range(0,MyDraw.yLen):
            print(cacheData['draw'][i][n])
-        print("")
+        print("")'''
 
    for x in range(0,len(cacheData['draw'])):
        for y in range(0,len(cacheData['draw'][x])):#abcd
@@ -171,14 +171,14 @@ def refreshcanvas():
            a = (x/MyDraw.xLen*600, y/MyDraw.yLen*600)
            b = ((a[0]+ 600/MyDraw.xLen), a[1]+600/MyDraw.yLen)
            if cacheData['draw'][x][y] == 0 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="white")
-           if cacheData['draw'][x][y] == 1 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="black")
+           if cacheData['draw'][x][y] == 1 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="green")
 
 
 
    print("canvas actualisé avec succès !")
 
 ##panneau  translation
-aside = LabelFrame(root, text="Coucou ,  je suis aside LabelFrame !")
+aside = LabelFrame(root, text="Configuration : tache de fond")
 aside.pack(fill="both", expand="yes", side=TOP)
 
 left = Label(aside, text="increment :")
