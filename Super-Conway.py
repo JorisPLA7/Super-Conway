@@ -8,9 +8,9 @@ global posxmax
 
 comValue =0
 posxmax = 200
-appVersion = "0.3.6 : Serializeu (commenté)"
-helpPage = "https://github.com/Kouskali/super-pano-editor/blob/master/README.md" #lien pages d'aide à consulter
-githubPage = "https://github.com/Kouskali/super-pano-editor/"
+appVersion = "00 : born"
+helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
+githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
 cacheData = {
 "angleinter":    0,
@@ -19,6 +19,8 @@ cacheData = {
 "versys":   appVersion,
 }# cachedata , données fournies par l'utilisateur, en attente d'être envoyées à la carte ou enregistrées
 ##boutons
+
+'''à changer'''
 def rbfcbutton():  #fonction appelée pour ouvrir un fichier existant
    global cacheData
    datatampon = cacheData
@@ -27,9 +29,11 @@ def rbfcbutton():  #fonction appelée pour ouvrir un fichier existant
       print("Erreur: Fichier ouvert mais lu sans succès")
    print("nouvelles données en ram: {}".format(cacheData))
 
+'''à changer'''
 def wbfcbutton(): #fonction appelée pour écrire les valeurs dans un fichier
    datasheets.pickwrite(cacheData) # se référer à datasheets.py
 
+'''à changer'''
 def verifbutton(): #vérification des données fournies par l'utilisateur
    nberror = 0
    if int(saisieangleinter.get()) < 0 or int(saisieangleinter.get()) > 50:
@@ -49,29 +53,27 @@ def verifbutton(): #vérification des données fournies par l'utilisateur
       guivalidation()
       print("Les informations saisies ne contiennes visiblement pas d' erreures")
 
-def serialsetbbutton():
-   serializer.establish(comValue, cacheData)
-def serialsendbutton():
-   serialzer.send(cacheData)
-
+'''à changer'''
 #réccupération des données de l'utilisateur
 def pulldata():
    cacheData["angletotal"] = saisieangletotal.get()
    cacheData["angleinter"] = saisieangleinter.get()
    cacheData["posx"] = saisieposx.get()
 
+'''à ne surtout pas changer <3'''
 def donothing(): #ne fait rien, comme son nom l'indique
    filewin = Toplevel(root)
    button = Button(filewin, text="Do nothing button")
    button.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
    print("Fenêtre qui ne fait rien ouverte")
 
-
+'''à changer'''
 def forcesave():
    print("tentative de sauvegarde forcée")
    pulldata()
    wbfcbutton()
 
+'''à changer'''
 #gui refreshers
 def guimessage(color, context, reason):
    messageframe = LabelFrame(root, text=context, fg=color )
@@ -85,7 +87,7 @@ def guimessage(color, context, reason):
 
    root.mainloop()
 
-#
+'''à changer'''
 def guivalidation():
    validationframe = LabelFrame(root, text="Tout semble correct :) ", fg="green" )
    validationframe.pack(fill="both", expand="no", side=BOTTOM)
@@ -138,11 +140,7 @@ try:
     print("bibliothèque importée avec succès :  lib\datasheets")
 except:
     print("Impossible d'importer la bibliothèque :  lib\datasheets")
-try:
-    from lib import serializer
-    print("bibliothèque importée avec succès :  lib\serializer")
-except:
-    print("Impossible d'importer la bibliothèque :  lib\ser")
+
 root=Tk() #création de la fenêtre tkinter racine
 
 root.wm_title('Super Pano GUI')#definition du titre
@@ -159,11 +157,6 @@ filemenu.add_command(label="Ouvrir une sauvegarde", command=rbfcbutton)
 filemenu.add_command(label="Sauvegarder sans validation", command=forcesave)
 filemenu.add_separator()
 
-serialmenu = Menu(filemenu) #sous² menu
-for i in range (0,10):
-   serialmenu.add_radiobutton(label="Ouvrir une lisaison série COM{}".format(i), variable=comValue, value=i, command=serializer.establish)
-filemenu.add_cascade(label="Etablir une liaison série", menu=serialmenu)
-filemenu.add_separator()
 filemenu.add_command(label="Quitter", command=root.destroy)
 menubar.add_cascade(label="Fichier", menu=filemenu)
 
@@ -178,7 +171,7 @@ menubar.add_cascade(label="Developpement", menu=devmenu)
 root.config(menu=menubar)
 
 ##Titre
-header = Label(root, text="Outil de configuration du trépied. Version {}".format(appVersion))
+header = Label(root, text="Super-Conway. Version {}".format(appVersion))
 header.pack(fill="both", expand="no")
 
 ##Panneau lateral
@@ -186,9 +179,10 @@ aside = Frame(root)
 aside.pack(side=LEFT)
 
 ##init canvas
-w = Canvas(aside, width=200, height=300)
+w = Canvas(aside, width=600, height=600)
 w.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
+'''à changer'''
 def refreshcanvas(cacheData):
    w.delete("all")
    rectangle = w.create_rectangle(10, 30, 190, 40, fill="white")
