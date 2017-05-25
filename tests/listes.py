@@ -19,12 +19,18 @@ def refresh(x,y,draw):
                 except:
                     pass
     print(S)
-    return S
+
+    if S == 3:
+        rep = True
+    else:
+        rep = False
+    return rep
+
     #return reverse(draw1[x][y])
 
 
 
-draw1 = [[True, False, False, False, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False]]
+draw1 = [[False, False, True, False, False, False], [False, True, False, True, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False], [False, False, False, False, False, False]]
 #draw1 = [ [False for y in range(yLen)] for x in range(xLen)]
 draw2 = [ [refresh(x,y,1) for y in range(yLen)] for x in range(xLen)]
 
