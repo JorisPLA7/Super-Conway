@@ -8,7 +8,7 @@ global posxmax
 
 comValue =0
 posxmax = 200
-appVersion = "00 : born"
+appVersion = "0.0.1"
 helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
 githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
@@ -36,17 +36,6 @@ def wbfcbutton(): #fonction appelée pour écrire les valeurs dans un fichier
 '''à changer'''
 def verifbutton(): #vérification des données fournies par l'utilisateur
    nberror = 0
-   if int(saisieangleinter.get()) < 0 or int(saisieangleinter.get()) > 50:
-      guimessage("red", "Il y a un problème :'(  !", "l'angle entre 2 positions doit être compris entre 0 et 50° !")
-      nberror +=1
-   if int(saisieangletotal.get()) < 0 or int(saisieangletotal.get()) > 720 :
-      guimessage("red", "Il y a un problème :'(  !", "l'angle total doit être compris entre 0 et 720° !")
-      nberror +=1
-
-   if int(saisieposx.get()) < 0 or int(saisieposx.get()) > posxmax:
-      guimessage("red", "Il y a un problème :'(  !", "La position linéaire doit être comprise entre 0 et {} !".format(posxmax))
-      nberror +=1
-
    if nberror == 0: #si tout est valide
       pulldata()
       refreshcanvas(cacheData)
@@ -56,9 +45,10 @@ def verifbutton(): #vérification des données fournies par l'utilisateur
 '''à changer'''
 #réccupération des données de l'utilisateur
 def pulldata():
-   cacheData["angletotal"] = saisieangletotal.get()
+    #récupération des données
+   '''cacheData["angletotal"] = saisieangletotal.get()
    cacheData["angleinter"] = saisieangleinter.get()
-   cacheData["posx"] = saisieposx.get()
+   cacheData["posx"] = saisieposx.get()'''
 
 '''à ne surtout pas changer <3'''
 def donothing(): #ne fait rien, comme son nom l'indique
@@ -187,53 +177,19 @@ def refreshcanvas(cacheData):
    w.delete("all")
    rectangle = w.create_rectangle(10, 30, 190, 40, fill="white")
 
-   posxdisp = int(int(cacheData["posx"]) / posxmax * 180 +10)
-
-   w.create_line(posxdisp, 25, posxdisp, 45) # curseur représentant la posx sur une échelle de  à posxmax
-   angletotrest = cacheData["angletotal"]
-   angleinterrest = cacheData["angleinter"]
-
-   coord1 = 2, 50, 200, 250 ##xcoinsupp, ycoinsupp, xcoininf, ycoininf
-   coord2 = 2, 50, 190, 250 ##xcoinsupp, ycoinsupp, xcoininf, ycoininf
-   arctot = w.create_arc(coord1, start=10, extent=cacheData["angletotal"], fill="white") #arc de cercle dont l'angle d'extension est proportionnel à : angle renseigné [360]
-   arcinter = w.create_arc(coord2, start=20, extent=cacheData["angleinter"], fill="black")
-
-   print("canvas actualisé avec succès :  !")
+   print("canvas actualisé avec succès !")
 
 ##panneau  translation
-translatif = LabelFrame(root, text="Module translatif")
-translatif.pack(fill="both", expand="yes", side=TOP)
+aside = LabelFrame(root, text="Coucou ,  je suis aside LabelFrame !")
+aside.pack(fill="both", expand="yes", side=TOP)
 
-left = Label(translatif, text="Position linéaire :")
+left = Label(aside, text="Position linéaire :")
 left.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
-saisieposx = Spinbox(translatif, from_=0, to=100,)
+saisieposx = Spinbox(aside, from_=0, to=100,)
 saisieposx.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
 ##panneau  rotat°
-rotatif = LabelFrame(root, text="Module rotatif")
-rotatif.pack(fill="both", expand="yes", side=TOP)
-
-   ## pann subrotat1
-subrotatif1 = Frame(rotatif)
-subrotatif1.pack(fill="both", expand="yes", side=TOP)
-
-titreangleinter = Label(subrotatif1, text="angle entre deux positions (degrés) :")
-titreangleinter.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
-
-saisieangleinter = Spinbox(subrotatif1, from_=0, to=50)
-saisieangleinter.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
-#cacheData["angleinter"] = saisieangleinter.get()
-
-   ## pann subrotat2
-subrotatif2 = Frame(rotatif)
-subrotatif2.pack(fill="both", expand="yes", side=TOP)
-
-titreangletotal = Label(subrotatif2, text="angle total du mouvement (degrés) :")
-titreangletotal.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
-
-saisieangletotal = Spinbox(subrotatif2, from_=0, to=50)
-saisieangletotal.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
 checkbutton= Button(root, text="Verifier", command=verifbutton)
 checkbutton.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
