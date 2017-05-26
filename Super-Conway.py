@@ -4,10 +4,12 @@
 '''à changer'''
 def rbfcbutton():  #fonction appelée pour ouvrir un fichier existant
    global cacheData
-   datatampon = cacheData
    cacheData = datasheets.pickread()
-   if cacheData["versys"] == "fail!": ##
-      print("Erreur: Fichier ouvert mais lu sans succès")
+   global MyDraw
+   MyDraw = listes.Draw(cacheData['xLen'],cacheData['yLen'],cacheData['p'])
+   MyDraw.applyDraw(cacheData['draw'])
+   checkbutton.pack()
+
    print("nouvelles données en ram: {}".format(cacheData))
 
 '''à changer'''

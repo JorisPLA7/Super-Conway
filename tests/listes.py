@@ -7,7 +7,9 @@ class Draw():
         self.new(p)
 
 
-
+    def applyDraw(self, preset):
+        self.draw[0] = preset
+        self.i = 0
 
     def __refresh(self,x,y,i):
         S = 0
