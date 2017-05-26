@@ -14,11 +14,18 @@ def rbfcbutton():  #fonction appelée pour ouvrir un fichier existant
 def wbfcbutton(): #fonction appelée pour écrire les valeurs dans un fichier
    datasheets.pickwrite(cacheData) # se référer à datasheets.py
 
+def createNewDraw():
+    pulldata()
+    global MyDraw
+    MyDraw = listes.Draw(cacheData['xLen'],cacheData['yLen'],cacheData['p'])
+    refreshcanvas()
+    checkbutton.pack()
 '''à changer'''
 def startbutton():
    nberror = 0
    if nberror == 0: #si tout est valide
       pulldata()
+
       MyDraw.increment(cacheData["increment"])
       refreshcanvas()
 
@@ -27,6 +34,28 @@ def startbutton():
 def pulldata():
     #récupération des données
    cacheData["increment"] = int(increment.get())
+   cacheData["p"] = 1/int(p.get())
+   cacheData["xLen"] = int(xLen.get())
+   cacheData["yLen"] = int(yLen.get())
+
+def refreshcanvas():
+   w.delete("all")
+
+
+   cacheData["draw"] = MyDraw.getCurrentDraw()
+
+   for x in range(0,len(cacheData['draw'])):
+       for y in range(0,len(cacheData['draw'][x])):#abcd
+           #print('x = {} y = {}  b = {}'.format(x,y,cacheData['draw'][x][y]))
+           a = (x/MyDraw.xLen*600, y/MyDraw.yLen*600)
+           b = ((a[0]+ 600/MyDraw.xLen), a[1]+600/MyDraw.yLen)
+           #if cacheData['draw'][x][y] == 0 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="white")
+           if cacheData['draw'][x][y] == 1 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="green", outline="")
+
+
+
+   print("canvas actualisé avec succès !")
+
 
 '''à ne surtout pas changer <3'''
 def donothing(): #ne fait rien, comme son nom l'indique
@@ -103,8 +132,9 @@ global posxmax
 
 global MyDraw
 
-MyDraw = listes.Draw(6,6)
-
+global thereIsADraw
+#MyDraw = listes.Draw(200,200,0.3)
+thereIsADraw =0
 comValue =0
 posxmax = 200
 appVersion = "0.0.2 canvas done"
@@ -155,29 +185,27 @@ aside.pack(side=LEFT)
 w = Canvas(aside, width=600, height=600, background='white')
 w.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
-'''à changer'''
-def refreshcanvas():
-   w.delete("all")
 
-   cacheData["draw"] = MyDraw.getCurrentDraw()
-   ''' for i in range(0,len(cacheData['draw'])):
-        for n in range(0,MyDraw.yLen):
-           print(cacheData['draw'][i][n])
-        print("")'''
+##panneau  init
+starter = LabelFrame(root, text="Configuration : initiale")
+starter.pack(fill="both", expand="yes", side=TOP)
 
-   for x in range(0,len(cacheData['draw'])):
-       for y in range(0,len(cacheData['draw'][x])):#abcd
-           print('x = {} y = {}  b = {}'.format(x,y,cacheData['draw'][x][y]))
-           a = (x/MyDraw.xLen*600, y/MyDraw.yLen*600)
-           b = ((a[0]+ 600/MyDraw.xLen), a[1]+600/MyDraw.yLen)
-           if cacheData['draw'][x][y] == 0 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="white")
-           if cacheData['draw'][x][y] == 1 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="green")
+left = Label(starter, text="probabilité de présence de vie sur une case (%)")
+left.pack()
+p = Scale(starter,from_=2, to=100,)
+p.pack()
 
+left2 = Label(starter, text="Taille de la grille (x,y)")
+left2.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
+xLen = Spinbox(starter, from_=20, to=1000,)
+xLen.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
+yLen = Spinbox(starter, from_=20, to=1000,)
+yLen.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
-   print("canvas actualisé avec succès !")
+creatbutton= Button(starter, text="CREER", command=createNewDraw)
+creatbutton.pack()
 
-##panneau  translation
 aside = LabelFrame(root, text="Configuration : tache de fond")
 aside.pack(fill="both", expand="yes", side=TOP)
 
@@ -190,6 +218,6 @@ increment.pack() #on intègre le module déclaré à sa fenêtre (pack(sans para
 ##panneau  rotat°
 
 checkbutton= Button(root, text="GO", command=startbutton)
-checkbutton.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
+#checkbutton.pack() #on le pack quand draw est init
 
 root.mainloop()

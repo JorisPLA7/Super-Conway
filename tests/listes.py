@@ -1,9 +1,13 @@
+import random
 class Draw():
-    def __init__(self,xLen,yLen):
-        self.xLen = 6
-        self.yLen = 6
+    def __init__(self,xLen,yLen,p):
+        self.xLen = xLen
+        self.yLen = yLen
         self.draw = []
-        self.startBaton()
+        self.new(p)
+        
+
+
 
     def __refresh(self,x,y,i):
         S = 0
@@ -26,8 +30,8 @@ class Draw():
             rep = 0
         return rep
 
-    def startBaton(self):
-        self.draw.append([[0, 1, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 1, 1], [0, 0, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0]])
+    def new(self,p):
+        self.draw.append([ [self.randbool(p) for y in range(self.yLen)] for x in range(self.xLen)])
         #self.draw1 = [ [0 for y in range(self.yLen)] for x in range(self.xLen)]
         for n in range(0,self.xLen):
             print(self.draw[0][n])
@@ -44,6 +48,15 @@ class Draw():
     def getCurrentDraw(self):
         return self.draw[len(self.draw)-1]
 
+    def randbool(self,p):
+        '''renseigner un p compris entre 0 et 1
+        '''
+        r = random.randint(0,int(1/p))
+        if r == 0:
+            return 1
+        else :
+            return 0
+
 if __name__ == '__main__':
-    MyDraw = Draw(6,6)
+    MyDraw = Draw(10,10,0.3)
     MyDraw.increment(10)
