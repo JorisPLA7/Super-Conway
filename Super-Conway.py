@@ -148,7 +148,7 @@ global passedTime
 passedTime = 800
 #MyDraw = listes.Draw(200,200,0.3)
 
-appVersion = "0.1 graph done"
+appVersion = "0.bench:1"
 helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
 githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
