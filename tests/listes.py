@@ -23,9 +23,11 @@ class Draw():
                 return 1
         elif S == 3:
             return 1
-        if S <2:
+        elif S <2:
             return 0
-        if S >3:
+        elif S >3:
+            return 0
+        else:
             return 0
 
     def new(self,p):
@@ -56,5 +58,8 @@ class Draw():
             return 0
 
 if __name__ == '__main__':
-    MyDraw = Draw(10,10,0.3)
+    a = int(input('xLen : '))
+    b = a
+    c = float(input('p : '))
+    MyDraw = Draw(a,b,c)
     MyDraw.increment(10)
