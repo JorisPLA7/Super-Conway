@@ -5,7 +5,7 @@ class Draw():
         self.yLen = yLen
         self.draw = []
         self.new(p)
-        
+
 
 
 
@@ -18,17 +18,15 @@ class Draw():
                         S += self.draw[i][x-1+nearx][y-1+neary]
                     except:
                         pass #si par exemple on est proche d'un bord, on évite le plantage lors de la lecture dans un index bidon
-        rep = 0
         if self.draw[i][x][y]:
             if S == 2:
-                rep = 1
+                return 1
         elif S == 3:
-            rep = 1
+            return 1
         if S <2:
-            rep = 0
+            return 0
         if S >3:
-            rep = 0
-        return rep
+            return 0
 
     def new(self,p):
         self.draw.append([ [self.randbool(p) for y in range(self.yLen)] for x in range(self.xLen)])

@@ -20,20 +20,23 @@ def createNewDraw():
     MyDraw = listes.Draw(cacheData['xLen'],cacheData['yLen'],cacheData['p'])
     refreshcanvas()
     checkbutton.pack()
-'''à changer'''
+
+
 def startbutton():
-    sTime = time.time()
     nberror = 0
     if nberror == 0: #si tout est valide
         pulldata()
 
+        sTime = time.time()
         MyDraw.increment(cacheData["increment"])
         fTime = time.time()
         passedTime = fTime - sTime
+
         chrono = Label(bench, text="Temps écoulé : {}".format(passedTime))
         chrono.pack()
 
         refreshcanvas()
+
 
 '''à changer'''
 #réccupération des données de l'utilisateur
@@ -57,10 +60,6 @@ def refreshcanvas():
            b = ((a[0]+ 600/MyDraw.xLen), a[1]+600/MyDraw.yLen)
            #if cacheData['draw'][x][y] == 0 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="white")
            if cacheData['draw'][x][y] == 1 : w.create_rectangle(a[0], a[1], b[0], b[1], fill="green", outline="")
-
-
-
-   print("canvas actualisé avec succès !")
 
 
 '''à ne surtout pas changer <3'''
@@ -87,8 +86,6 @@ def guimessage(color, context, reason):
 
    left = Label(messageframe, text=reason, fg=color)
    left.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
-
-   root.mainloop()
 
 ## init tkinter
 #importation des bibliotheques pyhton
@@ -148,7 +145,7 @@ global passedTime
 passedTime = 800
 #MyDraw = listes.Draw(200,200,0.3)
 
-appVersion = "0.bench:1"
+appVersion = "0.bench:2"
 helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
 githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
