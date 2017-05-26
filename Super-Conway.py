@@ -22,12 +22,18 @@ def createNewDraw():
     checkbutton.pack()
 '''à changer'''
 def startbutton():
-   nberror = 0
-   if nberror == 0: #si tout est valide
-      pulldata()
+    sTime = time.time()
+    nberror = 0
+    if nberror == 0: #si tout est valide
+        pulldata()
 
-      MyDraw.increment(cacheData["increment"])
-      refreshcanvas()
+        MyDraw.increment(cacheData["increment"])
+        fTime = time.time()
+        passedTime = fTime - sTime
+        chrono = Label(bench, text="Temps écoulé : {}".format(passedTime))
+        chrono.pack()
+
+        refreshcanvas()
 
 '''à changer'''
 #réccupération des données de l'utilisateur
@@ -123,6 +129,12 @@ try:
 except:
     print("Impossible d'importer la bibliothèque :  lib\datasheets")
 
+try:
+    import time
+    print("bibliothèque importée avec succès :  time")
+except:
+    print("Impossible d'importer la bibliothèque :  time")
+
 
 global appVersion #Variable contenant le numero de version du porgramme (écrit avec les données)
 
@@ -130,14 +142,13 @@ global palette
 
 global posxmax
 
-global MyDraw
-
 global thereIsADraw
+
+global passedTime
+passedTime = 800
 #MyDraw = listes.Draw(200,200,0.3)
-thereIsADraw =0
-comValue =0
-posxmax = 200
-appVersion = "0.0.2 canvas done"
+
+appVersion = "0.1 graph done"
 helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
 githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
@@ -206,6 +217,7 @@ yLen.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètr
 creatbutton= Button(starter, text="CREER", command=createNewDraw)
 creatbutton.pack()
 
+#increment
 aside = LabelFrame(root, text="Configuration : tache de fond")
 aside.pack(fill="both", expand="yes", side=TOP)
 
@@ -215,7 +227,11 @@ left.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètr
 increment = Spinbox(aside, from_=1, to=1000,)
 increment.pack() #on intègre le module déclaré à sa fenêtre (pack(sans paramètre) donc simplement à la suite du reste)
 
-##panneau  rotat°
+#bench
+bench = LabelFrame(root, text="Benchmark")
+bench.pack(fill="both", expand="yes", side=TOP)
+
+
 
 checkbutton= Button(root, text="GO", command=startbutton)
 #checkbutton.pack() #on le pack quand draw est init
