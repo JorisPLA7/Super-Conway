@@ -45,7 +45,7 @@ def startbutton():
 def pulldata():
     #récupération des données
    cacheData["increment"] = int(increment.get())
-   cacheData["p"] = 1/int(p.get())
+   cacheData["p"] = int(p.get())
    cacheData["xLen"] = int(xLen.get())
    cacheData["yLen"] = int(yLen.get())
 
@@ -202,7 +202,7 @@ starter.pack(fill="both", expand="yes", side=TOP)
 
 left = Label(starter, text="probabilité de présence de vie sur une case (%)")
 left.pack()
-p = Scale(starter,from_=2, to=100,)
+p = Scale(starter,from_=1, to=100,)
 p.pack()
 
 left2 = Label(starter, text="Taille de la grille (x,y)")
