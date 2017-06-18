@@ -1,4 +1,4 @@
-##PROGRAMME SOUS LICENSE G.P.L ........ Joris Placette ........ 2017
+##PROGRAMME SOUS LICENSE G.P.L (see README.md) ........ Joris Placette ........ 2017
 
 
 '''à changer'''
