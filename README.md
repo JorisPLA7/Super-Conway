@@ -9,8 +9,9 @@ Logiciel graphique du célèbre jeu de la vie de M. Conway.
 <h2>English :</h2>
 Graphical Conway's game of life.
 
+<strong>Pay attention: BUG </strong> elements near boders dont ( respect ) Conway's GOL rules.
+
 To run the program you need the following extensions:
 <ul>
 <li>Tkinter</li>
 </ul>
-
