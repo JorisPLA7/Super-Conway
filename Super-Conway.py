@@ -147,7 +147,7 @@ global passedTime
 passedTime = 800
 #MyDraw = listes.Draw(200,200,0.3)
 
-appVersion = "0.bench:2"
+appVersion = "0.HackerDu38"
 helpPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/README.md" #lien pages d'aide à consulter
 githubPage = "https://github.com/JorisPLA7/Super-Conway/blob/master/"
 
@@ -174,7 +174,7 @@ filemenu.add_command(label="Quitter", command=root.destroy)
 menubar.add_cascade(label="Fichier", menu=filemenu)
 
 helpmenu = Menu(menubar, tearoff=0) #sous menu
-helpmenu.add_command(label="Version de l'application : {}".format(appVersion), command=web.help)
+helpmenu.add_command(label="de l'application : {}".format(appVersion), command=web.help)
 helpmenu.add_command(label="Ouvrir une aide sur le web", command=web.help)
 menubar.add_cascade(label="Aide", menu=helpmenu)
 
@@ -184,7 +184,7 @@ menubar.add_cascade(label="Developpement", menu=devmenu)
 root.config(menu=menubar)
 
 ##Titre
-header = Label(root, text="Super-Conway. Version {}".format(appVersion))
+header = Label(root, text="Super-Conway. {}".format(appVersion))
 header.pack(fill="both", expand="no")
 
 ##Panneau lateral
