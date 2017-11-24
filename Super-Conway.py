@@ -174,7 +174,7 @@ filemenu.add_command(label="Quitter", command=root.destroy)
 menubar.add_cascade(label="Fichier", menu=filemenu)
 
 helpmenu = Menu(menubar, tearoff=0) #sous menu
-helpmenu.add_command(label="de l'application : {}".format(appVersion), command=web.help)
+helpmenu.add_command(label="Version de l'application : {}".format(appVersion), command=web.help)
 helpmenu.add_command(label="Ouvrir une aide sur le web", command=web.help)
 menubar.add_cascade(label="Aide", menu=helpmenu)
 
@@ -184,7 +184,7 @@ menubar.add_cascade(label="Developpement", menu=devmenu)
 root.config(menu=menubar)
 
 ##Titre
-header = Label(root, text="Super-Conway. {}".format(appVersion))
+header = Label(root, text="Super-Conway version {}".format(appVersion))
 header.pack(fill="both", expand="no")
 
 ##Panneau lateral
