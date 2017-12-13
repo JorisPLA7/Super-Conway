@@ -1,17 +1,6 @@
 # Super-Conway
-<h2>French</h2>
-Logiciel graphique du célèbre jeu de la vie de M. Conway.
+Graphic software of Mr. Conway's famous game of life.
 
-<strong>attention bug :</strong> les éléments à distance < 2 des bords ne respectent pas les rêgles du jeu de la vie.
+<strong>warn bug :</strong> elements at a distance <2 from the edges do not respect the rules of the game of life.
 
 <a href="https://www.noelshack.com/2017-22-1496242004-capture.png"><img src="https://image.noelshack.com/minis/2017/22/1496242004-capture.png" border="0" alt="1496242004-capture.png - envoi d'image avec NoelShack" title="1496242004-capture.png"/></a>
-
-<h2>English :</h2>
-Graphical Conway's game of life.
-
-<strong>Pay attention: BUG </strong> elements near boders dont ( respect ) Conway's GOL rules.
-
-To run the program you need the following extensions:
-<ul>
-<li>Tkinter</li>
-</ul>
