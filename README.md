@@ -1,6 +1,8 @@
 # Super-Conway
 Graphic software of Mr. Conway's famous game of life.
 
+Language : French/Français
+
 Personnal projet, realized for optimization tests (in python haha) and benchmarks in comparison to other languages
 
 <strong>warn bug :</strong> elements at a distance <2 from the edges do not respect the rules of the game of life.
